@@ -1,8 +1,9 @@
 ###import os - ###don't need this unless changing path
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import matplotlib as matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import os
 
 #delete old csv file
@@ -22,31 +23,22 @@ wget.download(url, 'SW.csv')
 #read csv
 sw = pd.read_csv("SW.csv")
 
-#extract pandas arrays of date and snow water equivalent
-df_date = sw['DATE(UTC)']
-df_sw_3a20p = sw['3A20P Callaghan']
-df_sw_3a25p = sw['3A25P Squamish River Upper']
-df_sw_1D06P = sw['1D06P Tenquille Lake']
-
-#convert pandas into np arrays for use with plt
-np_date = np.array(df_date)
-np_sw_3a20p = np.array(df_sw_3a20p)
-np_sw_3a25p = np.array(df_sw_3a25p)
-np_sw_1D06P = np.array(df_sw_1D06P)
+#initialize plt and setup params
+plt.figure(figsize=(15, 8), dpi=100)
 
 #plot date and swe
-plt.scatter(np_date, np_sw_3a20p)
-plt.scatter(np_date, np_sw_3a25p)
-plt.scatter(np_date, np_sw_1D06P)
+plt.plot(sw['DATE(UTC)'], sw['3A20P Callaghan'])
+plt.plot(sw['DATE(UTC)'], sw['3A25P Squamish River Upper'])
+plt.plot(sw['DATE(UTC)'], sw['1D06P Tenquille Lake'])
 
 #add title
 plt.title("Seasons Snow Water for Callghan, Squamish Valley, Tenquille Lake")
 
-#add legend - not done yet
-#plt.legend(["Snow Water Equivalent", "Snowfall"])
+# todo - adding legend to the curve - Not Working
+plt.legend()
 
-#play with axes - not done yet
-#matplotlib.axes.Axes.secondary_yaxis("Snowfall")
+# todo - fix x axis spacing of dates because they are all crammed together
+plt.xlabel('Date')
 
 #show plot
 plt.show()
