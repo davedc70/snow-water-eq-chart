@@ -1,3 +1,4 @@
+###This script downloads data from gov.bc.ca and creates a chart showing snow equivalent to date###
 ###import os - ###don't need this unless changing path
 import numpy as np
 import pandas as pd
